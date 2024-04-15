@@ -1,20 +1,30 @@
-import { Button } from '@/components/ui/button';
-import { ClerkLoading, UserButton, UserProfile } from '@clerk/nextjs';
-import Link from 'next/link';
+import { WorldComponent } from '@/components/World';
 
 export default function Home() {
+  // const { sessionId } = useAuth();
+
+  // if (!sessionId)
+  //   return (
+  //     <>
+  //       <Link href={'/auth/register'}>
+  //         <Button>Signup</Button>
+  //       </Link>
+  //       <Link href={'/auth/signin'}>
+  //         <Button>Signin</Button>
+  //       </Link>
+  //       <Link href={'/auth/logout'}>
+  //         <Button>Logout</Button>
+  //       </Link>
+  //       <UserProfile />
+  //     </>
+  //   );
+
   return (
-    <>
-      <Link href={'/auth/register'}>
-        <Button>Signup</Button>
-      </Link>
-      <Link href={'/auth/signin'}>
-        <Button>Signin</Button>
-      </Link>
-      <Link href={'/auth/logout'}>
-        <Button>Logout</Button>
-      </Link>
-      <UserProfile />
-    </>
+    <main className="flex flex-col items-center justify-center min-h-screen">
+      {/* Nav Bar */}
+      {/* Hero Secion */}
+      {/* Github Globe */}
+      <WorldComponent />
+    </main>
   );
 }
