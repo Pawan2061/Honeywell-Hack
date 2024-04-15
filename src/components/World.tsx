@@ -396,8 +396,13 @@ const sampleArcs = [
 
 export const WorldComponent = () => {
   return (
-    <section className="aspect-square h-[27rem] sm:h-[40rem] lg:h-[60rem]">
-      <World data={sampleArcs} globeConfig={globeConfig} />
-    </section>
+    <>
+      <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl text-center">
+        Handling prompts throughout the world
+      </h2>
+      <section className="aspect-square h-[27rem] sm:h-[40rem] lg:h-[60rem]">
+        <World data={sampleArcs} globeConfig={globeConfig} />
+      </section>
+    </>
   );
 };

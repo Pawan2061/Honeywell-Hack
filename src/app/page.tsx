@@ -26,9 +26,9 @@ export default function Home() {
       {/* Nav Bar */}
       {/* Hero Secion */}
       <MainHero />
+      <WorldComponent />
       <Features />
       {/* Github Globe */}
-      <WorldComponent />
     </main>
   );
 }
