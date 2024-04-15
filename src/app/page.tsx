@@ -1,4 +1,6 @@
 import { WorldComponent } from '@/components/World';
+import { Features } from '@/components/hero/Features';
+import { MainHero } from '@/components/hero/hero-main';
 
 export default function Home() {
   // const { sessionId } = useAuth();
@@ -23,6 +25,8 @@ export default function Home() {
     <main className="flex flex-col items-center justify-center min-h-screen">
       {/* Nav Bar */}
       {/* Hero Secion */}
+      <MainHero />
+      <Features />
       {/* Github Globe */}
       <WorldComponent />
     </main>
