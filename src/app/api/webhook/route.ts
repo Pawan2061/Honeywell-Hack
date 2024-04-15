@@ -1,7 +1,7 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { UserJSON, WebhookEvent } from '@clerk/nextjs/server';
-// import { db } from "@/lib/db";
+import { db } from '@/lib/db';
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -47,28 +47,39 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
+  switch (evt.type) {
+    case 'user.created':
+      // Get user details.
+      const { id, first_name, last_name, email_addresses, image_url } =
+        evt.data as UserJSON;
 
-  // Get user details.
-  const { id, first_name, last_name, email_addresses, image_url } =
-    evt.data as UserJSON;
+      // Create a new user in the database.
+      try {
+        console.log({ id, first_name, last_name, email_addresses, image_url });
+        const user = await db.user.create({
+          data: {
+            id,
+            name: `${first_name} ${last_name}`,
+            email: email_addresses[0].email_address,
+            imageUrl: image_url,
+          },
+        });
 
-  // Create a new user in the database.
-  try {
-    console.log({ id, first_name, last_name, email_addresses, image_url });
-    // const user = await db.user.create({
-    //   data: {
-    //     id,
-    //     name: `${first_name} ${last_name}`,
-    //     email: email_addresses[0].email_address,
-    //     imageUrl: image_url,
-    //   },
-    // });
+        console.log(user);
+        return new Response('New User created', { status: 201 });
+      } catch (err) {
+        console.log('Error creating user: ', err);
+        return new Response('Error occured', {
+          status: 500,
+        });
+      }
 
-    return new Response('New User created', { status: 201 });
-  } catch (err) {
-    console.log('Error creating user: ', err);
-    return new Response('Error occured', {
-      status: 500,
-    });
+    default:
+      console.log('Error: event not handled');
+      console.log(evt.type);
+      console.log(evt.data);
+      return new Response('Event not handled', {
+        status: 201,
+      });
   }
 }

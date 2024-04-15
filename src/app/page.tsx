@@ -11,6 +11,9 @@ export default function Home() {
       <Link href={'/auth/signin'}>
         <Button>Signin</Button>
       </Link>
+      <Link href={'/auth/logout'}>
+        <Button>Logout</Button>
+      </Link>
       <UserProfile />
     </>
   );
