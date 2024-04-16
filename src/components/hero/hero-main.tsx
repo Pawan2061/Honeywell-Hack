@@ -31,8 +31,7 @@ export function MainHero() {
             deliver you requested response in no time!!!
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            {/* TODO: Link */}
-            <Link href="#">
+            <Link href="/chat">
               <Button>Get started</Button>
             </Link>
             {/* TODO: Link & Text */}

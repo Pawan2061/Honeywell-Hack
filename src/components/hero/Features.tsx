@@ -3,21 +3,19 @@ import { Book, GlobeLock, Network } from 'lucide-react';
 
 const features = [
   {
-    name: 'Visualise Roadmap Tree.',
+    name: 'Complete Forms Easily.',
     description:
-      'We have built a visualisation tool to help you understand the roadmap better.',
+      'We have built chatbot  to help you understand the forms better.',
     icon: Network,
   },
   {
-    name: 'Book Recomendations.',
-    description:
-      'We help you with relivant books to read to understand the topic better. Powered by Oriley.',
+    name: 'Context Based Answer.',
+    description: 'We help you with relivant data to fill in places you need',
     icon: Book,
   },
   {
     name: 'Privacy Friendly.',
-    description:
-      'If you want to generate a roadmap without sharing it to the world, we got you covered.',
+    description: 'Your chats are secured by us. No need to worry',
     icon: GlobeLock,
   },
 ];
@@ -41,13 +39,13 @@ export const Features = () => {
       </div>
       <div className="relative overflow-hidden pt-16">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* <Image
-            src="./images/roadmapai-screenshot.png"
+          <Image
+            src="/demo.png"
             alt="App screenshot"
             className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-gray-900/10"
             width={2432}
             height={1442}
-          /> */}
+          />
           <div className="relative" aria-hidden="true">
             <div className="absolute -inset-x-20 bottom-0 bg-gradient-to-t from-white pt-[7%]" />
           </div>
