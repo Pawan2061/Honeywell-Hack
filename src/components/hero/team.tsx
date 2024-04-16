@@ -41,8 +41,8 @@ const people: People[] = [
   {
     name: 'Dr N. Suresh Kumar',
     role: 'Mentor: DS - Faculty',
-    imageUrl: 'https://avatars.githubusercontent.com/u/124338790?v=4',
-    link: 'https://github.com/avashneupane9857',
+    imageUrl: 'https://avatars.githubusercontent.com/u/37400014?v=4',
+    link: 'https://github.com/sureshkumar0707',
   },
 ];
 
