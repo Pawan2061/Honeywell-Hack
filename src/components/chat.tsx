@@ -3,16 +3,59 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useUser } from '@clerk/nextjs';
 import { Loader2, Send } from 'lucide-react';
-import Image from 'next/image';
 import { useState } from 'react';
+import { SingleChat } from './common/single-chat';
+
+interface IMessage {
+  content: string;
+  author: 'bot' | 'human';
+}
 
 export function Chat() {
   const [query, setQuery] = useState('');
   const [generating, setGenerating] = useState(false);
-  const [userMessage, setUserMessage] = useState('');
-  const [botMessage, setBotMessage] = useState('');
+  const [messages, setMessages] = useState<IMessage[]>([
+    {
+      author: 'bot',
+      content: 'hello bro',
+    },
+    {
+      author: 'human',
+      content: 'hello bot',
+    },
+  ]);
 
   const { user, isLoaded } = useUser();
+
+  const handleClick = async () => {
+    if (!query) return;
+    setGenerating(true);
+    setMessages((prev) => [
+      ...prev,
+      {
+        author: 'human',
+        content: query,
+      },
+    ]);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ question: query }),
+    };
+
+    try {
+      const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL!, options);
+      const { data } = await res.json();
+      setMessages((prev) => [...prev, { author: 'bot', content: data }]);
+      setGenerating(false);
+      setQuery('');
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   if (!isLoaded) return <h1 className="text-center text-3xl">Loading....</h1>;
 
@@ -21,65 +64,29 @@ export function Chat() {
       style={{
         minHeight: '93vh',
       }}
-      className="flex flex-col justify-between"
+      className="flex flex-col justify-between max-w-3xl mx-auto border-x-2"
     >
       <div className="flex flex-col w-full justify-between mx-auto max-h-[100vh-56px]">
-        {!botMessage ? (
-          <h1 className="text-3xl text-center">Type a message...</h1>
-        ) : (
-          <main
-            className="flex-1 border-t"
-            style={{
-              maxHeight: '84vh',
-              overflowY: 'scroll',
-            }}
-          >
-            <div className="container px-4 py-6 mx-auto flex flex-col gap-4">
-              <div className="space-y-1">
-                {botMessage && (
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      alt="Avatar"
-                      className="rounded-full h-10 w-10 bg-white"
-                      height="40"
-                      src={user?.imageUrl!}
-                      style={{
-                        aspectRatio: '40/40',
-                        objectFit: 'cover',
-                      }}
-                      width="40"
-                    />
-                    <div className="bg-gray-100 rounded-xl p-4 dark:bg-gray-800">
-                      <span className="font-bold underline">AI</span>
-                      <p className="text-sm leading-snug">{botMessage}</p>
-                    </div>
-                  </div>
-                )}
-                {userMessage && (
-                  <div className="flex items-center space-x-2 justify-end">
-                    <div className="bg-gray-100 rounded-xl p-4 dark:bg-gray-800">
-                      <span className="font-bold underline">
-                        {user?.firstName}
-                      </span>
-                      <p className="text-sm leading-snug">{userMessage}</p>
-                    </div>
-                    <Image
-                      alt="Avatar"
-                      className="rounded-full h-10 w-10 bg-white"
-                      height="40"
-                      src={user?.imageUrl!}
-                      style={{
-                        aspectRatio: '40/40',
-                        objectFit: 'cover',
-                      }}
-                      width="40"
-                    />
-                  </div>
-                )}
-              </div>
+        <main
+          className="flex-1 border-t"
+          style={{
+            maxHeight: '84vh',
+            overflowY: 'scroll',
+          }}
+        >
+          <div className="container px-4 py-6 mx-auto flex flex-col gap-4">
+            <div className="space-y-1">
+              {messages.map((msg, i) => (
+                <SingleChat
+                  {...msg}
+                  image={user!.imageUrl}
+                  firstName={user!.firstName!}
+                  key={i}
+                />
+              ))}
             </div>
-          </main>
-        )}
+          </div>
+        </main>
       </div>
       <div className="border-t">
         <div className="container px-4 py-4 mx-auto">
@@ -89,18 +96,25 @@ export function Chat() {
               gridTemplateColumns: '1fr auto',
             }}
           >
-            <Input
-              disabled={generating}
-              onChange={(e) => {
-                setQuery(e.currentTarget.value);
+            <form
+              className="flex"
+              onSubmit={(e) => {
+                e.preventDefault();
               }}
-              value={query}
-              className="rounded-lg"
-              placeholder="Type your message here."
-            />
-            <Button className="h-10 px-6 rounded-full">
-              {generating ? <Loader2 className="animate-spin" /> : <Send />}
-            </Button>
+            >
+              <Input
+                disabled={generating}
+                onChange={(e) => {
+                  setQuery(e.currentTarget.value);
+                }}
+                value={query}
+                className="rounded-lg"
+                placeholder="Type your message here."
+              />
+              <Button className="h-10 px-6 rounded-full" onClick={handleClick}>
+                {generating ? <Loader2 className="animate-spin" /> : <Send />}
+              </Button>
+            </form>
           </div>
         </div>
       </div>

@@ -4,15 +4,8 @@ import MobileNavbarDrawer from './mobile-nav';
 import { buttonVariants } from '../ui/button';
 import { BookIcon } from 'lucide-react';
 import { NavItems } from './nav-icons';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../ui/tooltip';
 
 export const NavBar = async () => {
-  console.log('----------------------------------------------');
   const user = await currentUser();
 
   if (!user) {

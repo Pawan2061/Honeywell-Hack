@@ -1,8 +1,8 @@
+import { NavBar } from '@/components/common/nav-bar';
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
-import { NavBar } from '@/components/common/nav-bar';
 
 const inter = Inter({ subsets: ['latin'] });
 
