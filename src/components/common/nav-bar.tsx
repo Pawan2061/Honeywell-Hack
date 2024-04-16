@@ -4,6 +4,7 @@ import MobileNavbarDrawer from './mobile-nav';
 import { buttonVariants } from '../ui/button';
 import { BookIcon } from 'lucide-react';
 import { NavItems } from './nav-icons';
+import { Logo } from './logo';
 
 export const NavBar = async () => {
   const user = await currentUser();
@@ -13,8 +14,7 @@ export const NavBar = async () => {
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 w-full">
         <div className="p-2 flex gap-2 items-center">
           <Link href="/">
-            {/* <Icons.roadmapai className="h-[40px] w-[120px]" /> */}
-            <BookIcon size={40} />
+            <Logo />
           </Link>
           <div className="ml-auto items-center">
             <div className={buttonVariants({})}>
@@ -33,7 +33,7 @@ export const NavBar = async () => {
           <MobileNavbarDrawer />
         </span>
         <Link href="/">
-          <BookIcon size={40} color="black" />
+          <Logo />
         </Link>
         <NavItems />
         <div className="ml-auto flex items-center"></div>
