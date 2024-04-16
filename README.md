@@ -25,4 +25,4 @@ pnpm run dev
 - Node -> Execution Context
 - Express -> Route Handler
 
-![Tech Stack](https://skillicons.dev/icons?i=ts,next,react,tailwind,prisma,postgres,nodejs,express,pnpm)
+![Tech Stack](https://skillicons.dev/icons?i=ts,next,react,tailwind,prisma,postgres,nodejs,express,pnpm,supabase)
