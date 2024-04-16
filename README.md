@@ -24,5 +24,7 @@ pnpm run dev
 - Postgres -> Primary Database
 - Node -> Execution Context
 - Express -> Route Handler
+- Supabase -> Vector Store
+
 
 ![Tech Stack](https://skillicons.dev/icons?i=ts,next,react,tailwind,prisma,postgres,nodejs,express,pnpm,supabase)
