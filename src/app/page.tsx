@@ -1,4 +1,5 @@
 import { WorldComponent } from '@/components/World';
+import { NavBar } from '@/components/common/nav-bar';
 import { Features } from '@/components/hero/Features';
 import { Footer } from '@/components/hero/footer';
 import { MainHero } from '@/components/hero/hero-main';
@@ -24,16 +25,17 @@ export default function Home() {
   //   );
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
+    <main className="flex flex-col items-center min-h-screen">
       {/* Nav Bar */}
+      <NavBar />
       {/* Hero Secion */}
-      <MainHero />
+      {/* <MainHero />
       <WorldComponent />
-      <Features />
+      <Features /> */}
       {/* Github Globe */}
       {/* Team */}
-      <Team />
-      <Footer />
+      {/* <Team />
+      <Footer /> */}
     </main>
   );
 }
