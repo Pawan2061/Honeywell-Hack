@@ -17,11 +17,7 @@ export function Chat() {
   const [messages, setMessages] = useState<IMessage[]>([
     {
       author: 'bot',
-      content: 'hello bro',
-    },
-    {
-      author: 'human',
-      content: 'hello bot',
+      content: 'Hello stranger, How can I help you???',
     },
   ]);
 
