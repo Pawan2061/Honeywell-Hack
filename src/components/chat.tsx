@@ -17,6 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './ui/alert-dialog';
+import { BotThinking } from './common/bot-thinking';
 
 const filter = new Filter();
 
@@ -126,6 +127,7 @@ export function Chat() {
                   key={i}
                 />
               ))}
+              {generating && <BotThinking />}
             </div>
           </div>
         </main>
