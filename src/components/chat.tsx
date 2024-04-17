@@ -5,6 +5,9 @@ import { useUser } from '@clerk/nextjs';
 import { Loader2, Send } from 'lucide-react';
 import { useState } from 'react';
 import { SingleChat } from './common/single-chat';
+import Filter from 'bad-words';
+
+const filter = new Filter();
 
 interface IMessage {
   content: string;
@@ -30,7 +33,7 @@ export function Chat() {
       ...prev,
       {
         author: 'human',
-        content: query,
+        content: filter.clean(query),
       },
     ]);
 
