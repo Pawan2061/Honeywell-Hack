@@ -6,6 +6,17 @@ import { Loader2, Send } from 'lucide-react';
 import { useState } from 'react';
 import { SingleChat } from './common/single-chat';
 import Filter from 'bad-words';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './ui/alert-dialog';
 
 const filter = new Filter();
 
@@ -17,6 +28,8 @@ interface IMessage {
 export function Chat() {
   const [query, setQuery] = useState('');
   const [generating, setGenerating] = useState(false);
+  const [dialogueCloseed, setDialogueCloseed] = useState(false);
+
   const [messages, setMessages] = useState<IMessage[]>([
     {
       author: 'bot',
@@ -55,6 +68,36 @@ export function Chat() {
       console.log(e);
     }
   };
+
+  if (!dialogueCloseed)
+    return (
+      <AlertDialog open={!dialogueCloseed}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Terms and service?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Please accept the Termas and weeet
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              onClick={() => {
+                setDialogueCloseed(true);
+              }}
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                setDialogueCloseed(true);
+              }}
+            >
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
 
   if (!isLoaded) return <h1 className="text-center text-3xl">Loading....</h1>;
 
