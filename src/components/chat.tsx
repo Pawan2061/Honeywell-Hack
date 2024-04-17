@@ -76,7 +76,7 @@ export function Chat() {
           <AlertDialogHeader>
             <AlertDialogTitle>Terms and service?</AlertDialogTitle>
             <AlertDialogDescription>
-              Please accept the Termas and weeet
+              Please accept the Terms and Conditions
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
